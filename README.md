@@ -149,6 +149,6 @@ MIT License
 
 <div align="center">
   
-Made with ❤️ by [Your Name/Organization]
+Made with ❤️ by your favorite ML group
   
 </div
