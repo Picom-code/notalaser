@@ -1,114 +1,154 @@
 # 3DCNN+ 🚀
 
-A modular pipeline for 3D cube regression using Box.com for data storage and PyTorch for model training. 📦🧠
+> A modular pipeline for 3D cube regression using Box.com for data storage 📦 and PyTorch 🔥 for model training.
 
-## Table of Contents 📚
+<div align="center">
+  
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+  
+</div>
 
-* [Overview 🌟](#overview-🌟)
-* [Prerequisites ✅](#prerequisites-✅)
-* [Setup 🔧](#setup-🔧)
-* [Part 1: Data Download (box.py) 📥](#part-1-data-download-boxpy-📥)
-* [Part 2: Model Training (cnnp.py) 🏋️‍♂️](#part-2-model-training-cncppy-🏋️‍♂️)
-* [How It Works 🔍](#how-it-works-🔍)
-* [Results 📈](#results-📈)
+## Overview 🔍
 
-## Overview 🌟
+**3DCNN+** is a two-part Python project designed for efficient 3D voxel-based regression:
 
-**3DCNN+** is a two-part Python project:
+1. **Data Download** (`box.py`): Securely fetches preprocessed NumPy data from Box.com using the Box Python SDK.
+2. **Model Training** (`cnnp.py`): Trains a performant 3D convolutional neural network on the downloaded data.
 
-1. **Data Download** (`box.py`): Fetches preprocessed NumPy data from Box.com using the Box Python SDK. 🎁
-2. **Model Training** (`cnnp.py`): Trains a 3D convolutional neural network (`CubeRegressor`) on the downloaded data for voxel-based regression. 🤖
+## 📋 Table of Contents
 
-This README explains how to configure, run, and understand each script. 📝
+- [Prerequisites](#prerequisites-)
+- [Setup](#setup-%EF%B8%8F)
+- [Part 1: Data Download](#part-1-data-download-boxpy-)
+- [Part 2: Model Training](#part-2-model-training-cnnppy-%EF%B8%8F)
+- [How It Works](#how-it-works-)
+- [Results](#results-)
 
 ## Prerequisites ✅
 
-* Python 3.8 or higher 🐍
-* Dependencies listed in `requirements.txt` 📦
+```
+Python 3.8+
+PyTorch 2.0+
+Box SDK
+NumPy, Pandas, Matplotlib, tqdm
+```
 
-Install all requirements with:
+Install dependencies with:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Setup 🔧
+## Setup ⚙️
 
-1. **Environment Variables**: Create a `.env` or export before running `box.py`:
+### 1. Environment Variables
 
-   ```bash
-   export BOX_CLIENT_ID="<your_client_id>" 🔑
-   export BOX_CLIENT_SECRET="<your_client_secret>" 🔒
-   export BOX_DEVELOPER_TOKEN="<your_developer_token>" ⏳
-   ```
-2. **Project Folder ID**:
+Create a `.env` file or export these variables before running:
 
-   * In `box.py`, set `project1_id` to your Box root folder ID. 📂
-   * The script auto-discovers subfolders named `code` and `processed`.
+```bash
+export BOX_CLIENT_ID="your_client_id"
+export BOX_CLIENT_SECRET="your_client_secret"
+export BOX_DEVELOPER_TOKEN="your_developer_token"
+```
 
-## Part 1: Data Download (box.py) 📥
+### 2. Project Folder ID
 
-This script logs into Box via OAuth2 and downloads the `processed` folder (and all nested files/folders) into `./processed/`. 🗂️
+In `box.py`, set `project1_id` to your Box root folder ID.
 
-Run:
+## Part 1: Data Download (box.py) 📦
 
-````bash
+This script authenticates with Box.com via OAuth2 and downloads the `processed` folder containing all required data.
+
+```bash
 python box.py
-``` 🔄
+```
 
-Key functions:
-- `get_folder_id_by_name(parent_folder_id, folder_name)`: Finds a subfolder ID by name. 🔍
-- `download_folder(folder_id, local_path)`: Recursively downloads all files/subfolders. 🔄
+### Key Functions
 
-After completion, check that `./processed/` contains `.npy` files for all bands and labels. 📂✅
+| Function | Description |
+|----------|-------------|
+| `get_folder_id_by_name()` | Locates a subfolder ID by name |
+| `download_folder()` | Recursively downloads files and subfolders |
 
 ## Part 2: Model Training (cnnp.py) 🏋️‍♂️
-This script loads the downloaded `.npy` data, builds a 3D CNN, and trains it. 🎓
 
-Run:
+This script handles data loading, model building, and training the 3D CNN.
+
 ```bash
 python cnnp.py
-``` ⚙️
+```
 
-### Configuration (top of `cnnp.py`)
-- `BATCH_SIZE`: samples per batch (adjust for GPU RAM). 🎛️
-- `BIG_EPOCHS`: number of training epochs. 🔄
-- `LEARNING_RATE`: initial learning rate. 🎚️
-- `NUM_SAMPLES`: patches sampled per epoch for mini-epochs. 🎲
+### Configuration Options
 
-### Dataset 🗄️
-- **`PatchDataset`** uses memory-mapped `.npy` arrays to avoid loading everything into RAM. 🧠💾
-- It indexes all valid voxel coordinates and extracts 3D patches around each voxel. 🧱
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `BATCH_SIZE` | Samples per batch | 64 |
+| `BIG_EPOCHS` | Number of training epochs | 100 |
+| `LEARNING_RATE` | Initial learning rate | 0.001 |
+| `NUM_SAMPLES` | Patches per mini-epoch | 10000 |
 
-### Model: `CubeRegressor` 🤖
-- A simple 3D CNN with convolutional layers, pooling, adaptive pooling, and a fully connected head. 🧩
+### Model Architecture: `CubeRegressor`
 
-### Training Loop 🔄
-1. **Compile** model with `torch.compile` for performance. ⚙️
-2. **Optimizer**: `Adam` with initial `LEARNING_RATE`. 🚀
-3. **Scheduler**: `ReduceLROnPlateau` on validation loss. 📉
-4. **Mixed Precision**: `torch.amp.autocast` for faster, memory-efficient training. ⚡
-5. **Checkpointing**: Saves weights (`.pth`) each epoch and a loss plot (`loss_plot.png`). 💾📊
+```
+Input → Conv3D → BatchNorm → ReLU → MaxPool3D → ... → AdaptiveAvgPool3D → FC → Output
+```
 
-### Evaluation 📊
-- After training, computes MSE, MAE, and R² on the validation set and prints results. 🏁
+### Training Features
 
-## How It Works 🔍
-1. **Authentication & Download**: `box.py` uses OAuth2 to fetch processed data from Box.com. 🔑
-2. **Memory-Mapped Dataset**: Efficiently accesses large NumPy arrays without high RAM usage. 🧠💾
-3. **Patch Extraction**: Returns 4D tensors `(batch, channels, D, H, W)` centered on voxels. 🧱
-4. **3D CNN**: Processes each patch to output a single regression value. 🤖
-5. **Training Strategy**: Large batch sizes, mini-epochs via sampling, mixed precision, and adaptive LR. 📈
+- **Memory Efficiency**: Memory-mapped arrays for low RAM usage
+- **Optimization**: Adam optimizer with ReduceLROnPlateau scheduler
+- **Speed**: Mixed precision training with torch.amp
+- **Monitoring**: Automatic checkpointing and loss visualization
 
-## Results 📈
-- **Output Directory**: `./checkpoints/` 📂
-  - Model weights: `epoch_<n>.pth` 🗄️
-  - Loss plot: `loss_plot.png` 📉
-- **Final Metrics** (printed):
-  ```text
-  Validation MSE: 0.001234, MAE: 0.025678, R2: 0.9123 🏆
-````
+## How It Works 🔄
+
+<div align="center">
+  
+```
+┌───────────┐    ┌───────────┐    ┌───────────┐    ┌───────────┐
+│  Box.com  │ →  │ box.py    │ →  │ Local     │ →  │ cnnp.py   │
+│  Storage  │    │ Download  │    │ Processed │    │ Training  │
+└───────────┘    └───────────┘    └───────────┘    └───────────┘
+                                                        ↓
+                                                  ┌───────────┐
+                                                  │   Model   │
+                                                  │  Outputs  │
+                                                  └───────────┘
+```
+  
+</div>
+
+1. **Authentication**: Secure OAuth2 connection to Box.com
+2. **Data Handling**: Memory-mapped NumPy arrays for efficient processing
+3. **Patch Extraction**: 4D tensors `(batch, channels, D, H, W)` centered on voxels
+4. **Training Strategy**: Large batches, sampling, mixed precision, adaptive learning rate
+
+## Results 📊
+
+### Output Files
+
+- **Model Checkpoints**: `./checkpoints/epoch_<n>.pth`
+- **Loss Visualization**: `./checkpoints/loss_plot.png`
+
+### Performance Metrics
+
+Example output:
+```
+Validation MSE: 0.001234
+Validation MAE: 0.025678
+Validation R²:  0.9123
+```
+
+## License
+
+MIT License
 
 ---
 
-You can adjust script parameters or swap in different models/datasets with minimal changes. 🔄
+<div align="center">
+  
+Made with ❤️ by [Your Name/Organization]
+  
+</div
