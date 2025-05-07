@@ -136,9 +136,9 @@ Input → Conv3D → BatchNorm → ReLU → MaxPool3D → ... → AdaptiveAvgPoo
 
 Example output:
 ```
-Validation MSE: 0.001234
-Validation MAE: 0.025678
-Validation R²:  0.9123
+Validation MSE: 0.014
+Validation MAE: 0.1098
+Validation R²:  -0.1282
 ```
 
 ## License
