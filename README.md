@@ -1,6 +1,92 @@
 # Presentation: https://www.canva.com/design/DAGmnsdCFRM/9IrlRw0kthWn_r9gtQrxjQ/edit?utm_content=DAGmnsdCFRM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
+
+
+# 3D CNN Base Model
+
+![Neural Network](https://img.shields.io/badge/3D--CNN-Model-blue)
+![Python](https://img.shields.io/badge/Python-3.6+-green)
+![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-red)
+
+A comprehensive implementation of a 3D Convolutional Neural Network (CNN) pipeline for volumetric data processing.
+
+## 📋 Directory Structure
+
+```
+.
+├── Preprocessing/
+│   └── eda-mat.py            # Converts raw .mat data into model-compatible format
+├── train-3dcnn-minibatches.py # Main training script
+├── 3dcnn-summary.py          # Evaluation and visualization script
+├── checkpoints/
+│   └── big_epoch_3_finished.pth # Trained model weights after 3 epochs
+└── Results/
+    ├── 3DCNN_results.txt     # Full evaluation metrics and console output
+    ├── loss_plot.png         # Training/validation loss curve
+    └── [prediction images]   # Visualization of predictions vs ground truth
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.6+
+- PyTorch
+- NumPy
+- Matplotlib
+- SciPy (for .mat file handling)
+
+### Data Preparation
+
+The `processed/` directory (not included in repository due to size constraints) should contain the preprocessed dataset in `.npy` format. To generate this data:
+
+1. Place your raw `.mat` files in the appropriate input directory
+2. Run the preprocessing script:
+   ```
+   python Preprocessing/eda-mat.py
+   ```
+
+### Training
+
+To train the 3D CNN model:
+
+```bash
+python train-3dcnn-minibatches.py
+```
+
+The script will save model checkpoints in the `checkpoints/` directory.
+
+### Evaluation
+
+To evaluate model performance and generate visualizations:
+
+```bash
+python 3dcnn-summary.py
+```
+
+This will produce prediction images and performance metrics in the `Results/` directory.
+
+## 📊 Results
+
+Model performance can be assessed through:
+
+- Side-by-side comparison images of predictions vs ground truth
+- Complete metrics in `3DCNN_results.txt`
+- Training/validation loss curves in `loss_plot.png`
+
+## 📝 Notes
+
+- The final model checkpoint (`big_epoch_3_finished.pth`) represents the model after 3 full training epochs
+- For large datasets, ensure sufficient computational resources are available
+- Hyperparameters can be adjusted in the respective training script
+
+## 📬 Contact
+
+For questions or issues, please open an issue in this repository.
+
+
+
 # 3DCNN+ 🚀
 
 > A modular pipeline for 3D cube regression using Box.com for data storage 📦 and PyTorch 🔥 for model training.
