@@ -1,7 +1,74 @@
 # Presentation: https://www.canva.com/design/DAGmnsdCFRM/9IrlRw0kthWn_r9gtQrxjQ/edit?utm_content=DAGmnsdCFRM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
+# 3D CNN Test Dataset Evaluation
 
+![Test Status](https://img.shields.io/badge/Test-Completed-success)
+![Model](https://img.shields.io/badge/Model-3D--CNN-blue)
+![Results](https://img.shields.io/badge/Results-Available-brightgreen)
+
+This directory contains all the necessary files and results for evaluating the baseline 3D CNN model on the test dataset.
+
+## 📋 Overview
+
+The baseline 3D CNN model has been executed on the test dataset with results pre-generated for your reference. This README provides instructions on how to use the scripts and interpret the results.
+
+## 📁 Directory Structure
+
+```
+.
+├── format_test_dataset.py     # Script to convert MATLAB files to model-compatible format
+├── test_dataset_summary.py    # Script to generate predictions and visualizations
+├── Test_Dataset_Results/      # Directory containing all output files
+│   ├── [prediction images]    # Side-by-side comparisons of predictions and ground truth
+│   └── test_results.txt       # Full console output with evaluation metrics
+└── pred/
+    └── big_epoch_4_finished.pth  # Final trained model checkpoint used for predictions
+```
+
+## 🚀 Using the Scripts
+
+### Data Preparation
+
+To convert your own MATLAB data to the required format:
+
+```bash
+python format_test_dataset.py
+```
+
+This script is configured to work when executed from its current directory within Box.
+
+### Generating Predictions
+
+To recreate the evaluation results or run on your own data:
+
+```bash
+python test_dataset_summary.py
+```
+
+This will:
+1. Load the model checkpoint (`big_epoch_4_finished.pth`)
+2. Process the test dataset
+3. Generate predictions
+4. Save visualization images and performance metrics
+
+## 📊 Pre-Generated Results
+
+For your convenience, we've already executed the evaluation pipeline:
+
+- **Prediction Images**: Located in `Test_Dataset_Results/`, these PNG files display the model's predictions side-by-side with the ground truth labels from the corresponding `x.npy` files.
+
+- **Performance Metrics**: The complete evaluation output has been saved to `test_results.txt`, including detailed metrics on model performance.
+
+## 📝 Notes
+
+- All results were generated using the final model checkpoint (`big_epoch_4_finished.pth`)
+- The pre-generated results are provided to ensure reproducibility and minimize potential issues
+- You can rerun any of the scripts on your own data following the instructions above
+
+## ❓ Support
+
+If you encounter any issues while running these scripts or have questions about the results, please refer to the main project documentation or contact the repository maintai
 
 # 3D CNN Base Model
 
@@ -80,10 +147,6 @@ Model performance can be assessed through:
 - The final model checkpoint (`big_epoch_3_finished.pth`) represents the model after 3 full training epochs
 - For large datasets, ensure sufficient computational resources are available
 - Hyperparameters can be adjusted in the respective training script
-
-## 📬 Contact
-
-For questions or issues, please open an issue in this repository.
 
 
 
