@@ -1,3 +1,6 @@
+# Presentation: https://www.canva.com/design/DAGmnsdCFRM/9IrlRw0kthWn_r9gtQrxjQ/edit?utm_content=DAGmnsdCFRM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
 # 3DCNN+ 🚀
 
 > A modular pipeline for 3D cube regression using Box.com for data storage 📦 and PyTorch 🔥 for model training.
