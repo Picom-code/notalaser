@@ -1,0 +1,102 @@
+ T2012135.1730 — Samples: 2735100
+   MSE: 0.027840
+   R² Score: -4.086
+   Weighted MSE: 0.001447
+   Accuracy: 0.890
+
+ T2012145.1805 — Samples: 2735100
+   MSE: 0.013328
+   R² Score: -0.171
+   Weighted MSE: 0.001188
+   Accuracy: 0.921
+
+ T2012277.0930 — Samples: 2735100
+   MSE: 0.008531
+   R² Score: 0.818
+   Weighted MSE: 0.002727
+   Accuracy: 0.853
+
+ T2012291.1750 — Samples: 2735100
+   MSE: 0.007352
+   R² Score: 0.439
+   Weighted MSE: 0.000972
+   Accuracy: 0.990
+
+ T2012291.1755 — Samples: 2735100
+   MSE: 0.002356
+   R² Score: 0.829
+   Weighted MSE: 0.000408
+   Accuracy: 0.984
+
+ T2012292.1655 — Samples: 2735100
+   MSE: 0.000920
+   R² Score: 0.910
+   Weighted MSE: 0.000085
+   Accuracy: 0.998
+
+ T2012292.1700 — Samples: 2735100
+   MSE: 0.024523
+   R² Score: -5.184
+   Weighted MSE: 0.001472
+   Accuracy: 0.851
+
+ T2012292.1835 — Samples: 2748600
+   MSE: 0.011544
+   R² Score: 0.267
+   Weighted MSE: 0.001843
+   Accuracy: 0.954
+
+ T2012293.1600 — Samples: 2735100
+   MSE: 0.007661
+   R² Score: -0.244
+   Weighted MSE: 0.000399
+   Accuracy: 0.968
+
+ T2012293.1605 — Samples: 2735100
+   MSE: 0.030803
+   R² Score: -8.638
+   Weighted MSE: 0.001123
+   Accuracy: 0.903
+
+ T2012293.1740 — Samples: 2735100
+   MSE: 0.040211
+   R² Score: -2.186
+   Weighted MSE: 0.004604
+   Accuracy: 0.693
+
+ T2013011.1715 — Samples: 2735100
+   MSE: 0.001092
+   R² Score: 0.818
+   Weighted MSE: 0.000077
+   Accuracy: 0.998
+
+ T2013040.1825 — Samples: 2735100
+   MSE: 0.001168
+   R² Score: 0.943
+   Weighted MSE: 0.000209
+   Accuracy: 0.980
+
+ T2013051.1805 — Samples: 2735100
+   MSE: 0.007392
+   R² Score: 0.594
+   Weighted MSE: 0.001633
+   Accuracy: 0.967
+
+ T2013105.1730 — Samples: 2735100
+   MSE: 0.011681
+   R² Score: -0.036
+   Weighted MSE: 0.001688
+   Accuracy: 0.984
+
+ T2013185.1735 — Samples: 2735100
+   MSE: 0.123884
+   R² Score: -55.487
+   Weighted MSE: 0.002793
+   Accuracy: 0.646
+
+=== Overall Metrics ===
+Total Samples: 43775100
+MSE: 0.020015
+R² Score: -0.229
+Weighted MSE: 0.001417
+Accuracy: 0.911
