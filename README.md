@@ -66,9 +66,6 @@ For your convenience, we've already executed the evaluation pipeline:
 - The pre-generated results are provided to ensure reproducibility and minimize potential issues
 - You can rerun any of the scripts on your own data following the instructions above
 
-## ❓ Support
-
-If you encounter any issues while running these scripts or have questions about the results, please refer to the main project documentation or contact the repository maintai
 
 # 3D CNN Base Model
 
